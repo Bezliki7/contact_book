@@ -10,7 +10,8 @@ const UpdateForm = ({ setIsAdded, setPopup, currContact }) => {
 
   const onSubmit = (values: ContactWithAddInf) => {
     const { name, number, FirstComb } = values;
-    if (!(currContact.number == FirstComb + number)) {
+    console.log(!(currContact.number == FirstComb + number) || !(currContact.name == name) )
+    if (!(currContact.number == FirstComb + number) || !(currContact.name == name) ) {
       ContactAPI.changeContact({ id: currContact.id, number: FirstComb + number, name })
         .then(() => {
           setIsAdded(true);

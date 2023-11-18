@@ -1,0 +1,60 @@
+$background: #848484;
+
+body {
+    background-color: $background;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+    width: 430px;
+    border: 5px solid #3f3f3f;
+    height: 100%;
+    background-color: #d3cfcf;
+    margin: 50px auto;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.contact {
+    display: inline-block;
+    width: 350px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+    border: 1px solid #232323;
+    padding: 5px;
+    background-color: #ebebeb;
+}
+
+.button {
+    background-color: #3f3f3f;
+    color: white;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    float: right;
+}
+
+svg {
+    margin: 6px;
+    opacity: 0.4;
+}
+
+svg:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.skeleton {
+    
+    margin-left: -3.5px;
+    margin-bottom: -20px;
+}
+
+
+
+
+

@@ -1,7 +1,7 @@
+import { Request, Response } from 'express';
 import contactController from '../controller/contact.controller.js';
 
-const contactDataValidate = async (req, res, n) => {
-  console.log(req.body.number.length != 11 )
+const contactDataValidate = async (req:Request, res:Response, n:number) => {
   if (!req.body.name) {
     throw new Error('name is required');
   }

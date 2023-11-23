@@ -9,9 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/api', contactRouter)
 
-app.listen(PORT, (err) => {
-    if (err) {
-        return console.log(err)
-    }
+app.listen(PORT, 
+    () => {
     console.log('serv ok')
 })

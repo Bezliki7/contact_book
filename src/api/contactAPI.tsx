@@ -10,7 +10,8 @@ const ContactAPI = {
     return axios.post('http://localhost:3333/api/contact', contact )
   },
   changeContact: (contact:ContactType) => {
-    return axios.put('http://localhost:3333/api/contact', contact)
+    const {name, number} = contact
+    return axios.put(`http://localhost:3333/api/contact/${contact.id}`, {name, number})
   },
   deleteContact: (id:number | undefined) => {
     return axios.delete(`http://localhost:3333/api/contact/${id}`)

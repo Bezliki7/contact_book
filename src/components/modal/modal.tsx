@@ -1,50 +1,47 @@
 import React from 'react';
 import ContactAPI from '../../api/contactAPI.tsx';
-import AddForm from '../addForm.tsx';
 import '../modal/modal.scss';
-import UpdateForm from '../updateForm.tsx';
+import Form, { FormType } from '../form.tsx';
 
-function Modal({ setPopup, title, body, currContact, ...props }) {
+function Modal(props) {
   const onClickButton = () => {
-    ContactAPI.deleteContact(currContact.id);
+    ContactAPI.deleteContact(props.currContact.id);
     props.setIsAdded(!props.isAdded);
-    setPopup('none');
+    props.setPopup('none');
+    props.setCurrContact(null);
   };
   return (
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>{title}</h2>
+          <h2>{ props.popup == 'addForm' ? 'Добавить контакт' : props.popup == 'delete' ? 'Удалить контакт' : 'Измеить контакт' }</h2>
         </div>
 
-        {body == 'addForm' ? (
-          <div className="modal-body">
-            <AddForm setIsAdded={props.setIsAdded} setPopup={setPopup} currContact={currContact} />{' '}
-          </div>
-        ) : (
-          body == 'updateForm' && (
-            <div className="modal-body">
-              <UpdateForm setIsAdded={props.setIsAdded} setPopup={setPopup} currContact={currContact} />{' '}
-            </div>
-          )
-        )}
+        <div className="modal-body">
+          <Form {...props as FormType} />
+        </div>
 
         <div className="modal-footer">
-          <button className="cancelButton" onClick={() => setPopup('none')}>
+          <button
+            className="cancelButton"
+            onClick={() => {
+              props.setPopup('none');
+              props.setCurrContact(null);
+            }}>
             отмена
           </button>
 
-          {props.button == 'добавить' ? (
+          {props.popup == 'addForm' ? (
             <button form="addForm" type="submit" className="button">
-              {props.button}
+              добавить
             </button>
-          ) : props.button == 'удалить' ? (
+          ) : props.popup == 'delete' ? (
             <button className="button" onClick={onClickButton}>
-              {props.button}
+              удалить
             </button>
           ) : (
             <button form="updateForm" className="button" type="submit">
-              {props.button}
+              изменить
             </button>
           )}
         </div>

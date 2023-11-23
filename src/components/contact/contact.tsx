@@ -1,9 +1,9 @@
 import React from 'react';
 import ChangeSvg from '../../assets/changeSvg.tsx';
 import TrashSvg from '../../assets/trashSvg.tsx';
-import { popupAction } from '../../types/contact.types.tsx';
+import { ContactType, popupAction } from '../../types/contact.types.tsx';
 
-function Contact({ obj, setPopup, setCurrContact }) {
+function Contact({ obj, setPopup, setCurrContact }:ContactProps) {
   const onClickSvg = (popupType:popupAction) => {
     setPopup(popupType);
     setCurrContact(obj);
@@ -29,3 +29,9 @@ function Contact({ obj, setPopup, setCurrContact }) {
 }
 
 export default Contact;
+
+type ContactProps = {
+  obj: ContactType
+  setPopup: (popupType: popupAction) => void
+  setCurrContact: (obj : ContactType) => void
+}

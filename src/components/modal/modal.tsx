@@ -4,12 +4,11 @@ import AddForm from '../addForm.tsx';
 import '../modal/modal.scss';
 import UpdateForm from '../updateForm.tsx';
 
-function Modal({ popup, title, body, currContact, ...props }) {
+function Modal({ setPopup, title, body, currContact, ...props }) {
   const onClickButton = () => {
     ContactAPI.deleteContact(currContact.id);
     props.setIsAdded(!props.isAdded);
-    props.setPopup(0);
-    console.log(currContact);
+    setPopup('none');
   };
   return (
     <div className="modal">
@@ -20,18 +19,18 @@ function Modal({ popup, title, body, currContact, ...props }) {
 
         {body == 'addForm' ? (
           <div className="modal-body">
-            <AddForm setIsAdded={props.setIsAdded} setPopup={props.setPopup} currContact={currContact} />{' '}
+            <AddForm setIsAdded={props.setIsAdded} setPopup={setPopup} currContact={currContact} />{' '}
           </div>
         ) : (
           body == 'updateForm' && (
             <div className="modal-body">
-              <UpdateForm setIsAdded={props.setIsAdded} setPopup={props.setPopup} currContact={currContact} />{' '}
+              <UpdateForm setIsAdded={props.setIsAdded} setPopup={setPopup} currContact={currContact} />{' '}
             </div>
           )
         )}
 
         <div className="modal-footer">
-          <button className="cancelButton" onClick={() => props.setPopup(0)}>
+          <button className="cancelButton" onClick={() => setPopup('none')}>
             отмена
           </button>
 

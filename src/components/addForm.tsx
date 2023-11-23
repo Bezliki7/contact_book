@@ -15,7 +15,7 @@ const AddForm = ({ currContact, ...props }) => {
       })
       .catch((err) => console.error(err.response.data));
 
-    props.setPopup(0);
+    props.setPopup('none');
   };
 
   return (

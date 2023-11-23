@@ -18,7 +18,7 @@ const UpdateForm = ({ setIsAdded, setPopup, currContact }) => {
         })
         .catch((err) => err);
     }
-    setPopup(0);
+    setPopup('none');
   };
   return (
     <div>

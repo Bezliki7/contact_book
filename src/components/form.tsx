@@ -1,32 +1,34 @@
-import React, { ReactNode } from 'react';
-import { Field, Formik, FormikProps } from 'formik';
+import React from 'react';
+import { Field, Formik } from 'formik';
 import ContactAPI from '../api/contactAPI.tsx';
-import { validateName, validateNumber } from './validators/contactValidate.tsx';
+import { validateName, validateNumber } from '../validators/contactValidate.tsx';
 import '../scss/components/form.scss';
 import { ContactType, ContactWithAddInf, popupAction } from '../types/contact.types.tsx';
 
 const Form = ({ setIsAdded, setPopup, currContact, popup, setCurrContact }: FormType) => {
-  if (popup == 'delete') return null;
-
   const firstCombCount = currContact?.number?.at(0) == '8' ? 1 : 2;
 
   const onSubmit = (values: ContactWithAddInf) => {
     const { name, number, FirstComb } = values;
-    
-    if (popup == 'addForm') {
+
+    if (popup === 'addForm') {
       ContactAPI.createContact({ number: FirstComb + number, name })
         .then(() => {
           setIsAdded(true);
         })
         .catch((err) => console.error(err.response.data));
     }
-
-    if (!(currContact?.number == FirstComb + number) || !(currContact.name == name)) {
-      ContactAPI.changeContact({ id: currContact?.id, number: FirstComb + number, name })
-        .then(() => {
-          setIsAdded(true);
-        })
-        .catch((err) => err);
+    if (popup === 'delete') {
+      ContactAPI.deleteContact(currContact?.id).then(() => setIsAdded(true));
+    }
+    if (popup === 'updateForm') {
+      if (!(currContact?.number == FirstComb + number) || !(currContact.name == name)) {
+        ContactAPI.changeContact({ id: currContact?.id, number: FirstComb + number, name })
+          .then(() => {
+            setIsAdded(true);
+          })
+          .catch((err) => err);
+      }
     }
 
     setPopup('none');
@@ -62,6 +64,7 @@ const Form = ({ setIsAdded, setPopup, currContact, popup, setCurrContact }: Form
                 <option value="+7">+7</option>
                 <option value="8">8</option>
               </Field>
+
               <Field
                 className="numberInput"
                 type="tel"

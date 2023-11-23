@@ -7,7 +7,7 @@ const router = new Router();
 
 router.post('/contact', async (req, res, next) => {
   try {
-    await contactDataValidate(req, res, next);
+    await contactDataValidate(req, res, 0);
     await contactController.createContact(req, res);
   } catch (err) {
     next(err)
@@ -15,9 +15,9 @@ router.post('/contact', async (req, res, next) => {
 });
 
 router.get('/contact', ContactController.getContacts);
-router.put('/contact', async (req, res,next) => {
+router.put('/contact/:id', async (req, res,next) => {
   try {
-    await contactDataValidate(req, res, next);
+    await contactDataValidate(req, res, 1);
     await contactController.updateContact(req, res);
   } catch (err) {
     next(err);

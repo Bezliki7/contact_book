@@ -1,6 +1,6 @@
 import contactController from '../controller/contact.controller.js';
 
-const contactDataValidate = async (req, res, next) => {
+const contactDataValidate = async (req, res, n) => {
   console.log(req.body.number.length != 11 )
   if (!req.body.name) {
     throw new Error('name is required');
@@ -16,7 +16,7 @@ const contactDataValidate = async (req, res, next) => {
   } else {throw new Error('number should have 11||12 characters');}
 
   const response = await contactController.getOnePhoneNumber(req);
-  if (response.length > 1 ) {
+  if (response.length > n ) {
     throw new Error('number is already exist');
   }
 
